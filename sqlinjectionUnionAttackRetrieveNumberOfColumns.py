@@ -3,7 +3,6 @@ import sys
 import urllib3
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
-# proxies = {"http":"http://127.0.0.1:8080", "https": "https://127.0.0.1:8080"}
 def exploit_sqli_column_number(url):
     path = "filter?category=Pets"
     i=1
@@ -14,7 +13,7 @@ def exploit_sqli_column_number(url):
         if r.status_code == 200: #also can evaluate 500 status code
             return i 
         sql_payload = sql_payload+",NULL"
-        i+=1
+        i+=1    
         
     return False
 
