@@ -41,9 +41,6 @@ def obtener_credenciales_acceso(url, uri, numero_columnas_bd, columna_string, bb
     print(reset_color)
     print("[+] La ejecución del script ha terminado satisfactoriamente.")
             
-            
-            
-            
 def determinar_bbdd(url, uri, numero_columnas_bd, columna_string):
     PARSER = 'html.parser'
     
