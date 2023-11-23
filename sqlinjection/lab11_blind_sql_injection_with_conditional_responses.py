@@ -166,6 +166,7 @@ def obtener_password(url, cookies, cookie_a_explotar, longitud_password):
                 sys.stdout.write('\r' + password_extracted)
                 sys.stdout.flush()
                 break
+    return password_extracted
 
 def main():
     url = "https://0a3d003e043c6e9c803e532500100094.web-security-academy.net/"
