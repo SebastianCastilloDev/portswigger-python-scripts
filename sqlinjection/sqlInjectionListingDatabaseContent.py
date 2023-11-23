@@ -121,7 +121,7 @@ def consultar_columnas(params):
     print(Fore.BLUE + "\nIngrese las columnas a consultar" + Fore.RESET)
     
     print(Fore.BLUE + "Columna 1: " + Fore.RESET, end="")
-    columna_1 = int(input())
+    columna_1 = int(input()) 
     
     print(Fore.BLUE + "Columna 2: " + Fore.RESET, end="")
     columna_2 = int(input())
